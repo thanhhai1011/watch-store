@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken'
+import jwt from "jsonwebtoken";
 import multer from "multer";
 import path from "path";
 
@@ -12,7 +12,7 @@ export const generateToken = (user) => {
       address: user.address,
       isAdmin: user.isAdmin,
     },
-    process.env.TOKEN_SECRET || "caokhahieu",
+    process.env.TOKEN_SECRET || "nguyenthanhhai",
     {
       expiresIn: "30d",
     }
@@ -25,7 +25,7 @@ export const isAuth = (req, res, next) => {
     const token = authorization.slice(7, authorization.length); // Bearer
     jwt.verify(
       token,
-      process.env.TOKEN_SECRET || "caokhahieu",
+      process.env.TOKEN_SECRET || "nguyenthanhhai",
       (err, decode) => {
         if (err) {
           res.status.send({ message: "invalid token" });
@@ -67,5 +67,3 @@ export function PinComment(arr, fromIndex, toIndex) {
 
   return arr;
 }
-
-
