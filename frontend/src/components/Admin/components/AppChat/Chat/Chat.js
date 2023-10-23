@@ -4,6 +4,7 @@ import io from "socket.io-client";
 import { useSelector } from "react-redux";
 import ListMessage from "./ListMessage";
 import TypeMessage from "./TypeMessage";
+import { BASE_URL } from "../../../../../constants/UserConstant";
 
 function Chat(props) {
   let socket;
@@ -11,13 +12,13 @@ function Chat(props) {
   const [messages, setMessages] = useState([]);
   const { userInfo } = useSelector((state) => state.userSignin);
   const idConversation = useSelector((state) => state.chat.idConversation);
-  const nameConversation = useSelector(state => state.chat.nameConversation)
+  const nameConversation = useSelector((state) => state.chat.nameConversation);
 
   useEffect(() => {
     if (!idConversation) return;
     const getAllMessageByConversation = async () => {
       const { data } = await axios.get(
-        `http://localhost:4000/chat/message?idConversation=${idConversation}`
+        `${BASE_URL}/chat/message?idConversation=${idConversation}`
       );
       setMessages(data.messageList);
     };
@@ -41,11 +42,10 @@ function Chat(props) {
     const scrollMessage = () => {
       var element = document.querySelector(".ad-chatuser-listmessage");
       element.scrollTop = element.scrollHeight;
-    }
-    
-      scrollMessage()
+    };
 
-  })
+    scrollMessage();
+  });
 
   const handleFormSubmit = async (message) => {
     const sender = userInfo.name;
@@ -55,29 +55,23 @@ function Chat(props) {
       message,
       idConversation,
     };
-    const { data } = await axios.post(
-      "http://localhost:4000/chat/save",
-      payload
-    );
-    socket.emit('chat', data);
+    const { data } = await axios.post(`${BASE_URL}/chat/save`, payload);
+    socket.emit("chat", data);
   };
   return (
-   
-      <div className="ad-chatuser">
-        <div className="ad-chatuser-user">
-          <span className="ad-chatuser-user-name">{nameConversation}</span>
-        </div>
-
-        {messages ? (
-          <ListMessage messages={messages} user={userInfo}></ListMessage>
-        ) : (
-          ""
-        )}
-
-        <TypeMessage onSubmit={handleFormSubmit}></TypeMessage>
+    <div className="ad-chatuser">
+      <div className="ad-chatuser-user">
+        <span className="ad-chatuser-user-name">{nameConversation}</span>
       </div>
-      
-   
+
+      {messages ? (
+        <ListMessage messages={messages} user={userInfo}></ListMessage>
+      ) : (
+        ""
+      )}
+
+      <TypeMessage onSubmit={handleFormSubmit}></TypeMessage>
+    </div>
   );
 }
 

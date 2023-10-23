@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { BASE_URL } from "../../constants/UserConstant";
 
 export default function VnPay() {
   const { order } = useSelector((state) => state.orderInfo);
@@ -12,10 +13,7 @@ export default function VnPay() {
       paymentMethod: "payOnline",
     };
 
-    const { data } = await axios.post(
-      "http://localhost:4000/payment/create",
-      OrderPaid
-    );
+    const { data } = await axios.post(`${BASE_URL}/payment/create`, OrderPaid);
 
     if (data.code === "00") {
       document.location = data.data;
