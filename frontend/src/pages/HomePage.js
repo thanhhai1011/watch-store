@@ -15,10 +15,12 @@ function HomePage(props) {
   return (
     <div style={{ position: "relative" }}>
       <Header />
-      <Carousel />
-      <Bentley />
-      <Citizen />
-      <Casio />
+      <div className="container">
+        <Carousel />
+        <Bentley />
+        <Citizen />
+        <Casio />
+      </div>
       <Footer></Footer>
       <ScrollToTop></ScrollToTop>
       {userInfo && userInfo.isAdmin === false ? <AppChat></AppChat> : ""}

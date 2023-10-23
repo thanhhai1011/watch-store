@@ -40,3 +40,13 @@
 a{
   text-decoration: none;
 }
+.container {
+  margin: 0 auto;
+  min-width: 1220px;
+}
+@media screen and (max-width: 1200px) {
+  .container {
+    min-width: unset;
+    max-width: 1220px !important;
+  }
+}
