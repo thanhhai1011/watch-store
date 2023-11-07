@@ -84,6 +84,10 @@ export const getOrderByUserReducer = (state = {}, action) => {
       return { ...state, myOrdersPaid: action.payload };
     }
 
+    case "GET_ORDER_DETAIL_BY_USER": {
+      return { ...state, myDetailsOrder: action.payload };
+    }
+
     default:
       return state;
   }

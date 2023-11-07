@@ -1,4 +1,4 @@
-import express from 'express'
+import express from "express";
 import {
   createOrder,
   GetAllOrder,
@@ -17,6 +17,8 @@ import {
   updateOrder,
   PrintOrderGhn,
   clientCancelOrder,
+  GetOrderByUser,
+  GetOrderDetailByUser,
 } from "../controllers/OrderController.js";
 import { isAuth, isAdmin } from "../untils/until.js";
 
@@ -28,7 +30,7 @@ OrderRouter.post("/cancel/:id", clientCancelOrder);
 OrderRouter.get("/print/:id", PrintOrderGhn);
 OrderRouter.put("/shipping/:id", ShippingProduct);
 OrderRouter.put("/paid/:id", PaidProduct);
-OrderRouter.delete('/delete/:id', DeleteOrder)
+OrderRouter.delete("/delete/:id", DeleteOrder);
 
 OrderRouter.get("/", GetAllOrder);
 OrderRouter.get("/orderPaypal", GetAllOrderPaypal);
@@ -39,12 +41,11 @@ OrderRouter.get("/orderPaid", GetAllOrderPaid);
 OrderRouter.get("/allOrderInAMonth", GetAllOrderInAMonth);
 
 // --- user
-OrderRouter.get("/:id", GetAllOrder);
+OrderRouter.get("/:id", GetOrderByUser);
+OrderRouter.get("/orderDetail/:orderId", GetOrderDetailByUser);
 OrderRouter.get("/orderPaypal/:id", GetOrderPaypalByUser);
 OrderRouter.get("/orderPendding/:id", GetOrderPenddingByUser);
 OrderRouter.get("/orderShipping/:id", GetOrderShippingByUser);
 OrderRouter.get("/orderpaid/:id", GetOrderPaidByUser);
 
-
-
-export default OrderRouter
+export default OrderRouter;

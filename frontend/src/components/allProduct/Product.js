@@ -1,13 +1,32 @@
 import React from "react";
 import { formatPrice } from "../../untils/index";
+import { useDispatch } from "react-redux";
+import { AddToCart } from "../../actions/CartAction";
+import { message } from "antd";
 
 function Product(props) {
   const { product } = props;
+  const dispatch = useDispatch();
 
-  function AddToCart(product) {
-    // const action = AddProduct(product);
-    // dispatch(action);
-  }
+  const success = () => {
+    message.success({
+      content: "Thêm vào giỏ hàng thành công",
+      duration: 1,
+      className: "custom-class",
+      style: {
+        position: "absolute",
+        right: "2rem",
+        top: "2rem",
+        margin: "1rem 0",
+      },
+    });
+  };
+
+  const AddProductToCart = async (product) => {
+    const action = AddToCart(product);
+    await dispatch(action);
+    success();
+  };
 
   return (
     <div className="hotsale-listproduct-product">
@@ -23,7 +42,7 @@ function Product(props) {
         <p>{product.percentDiscount}%</p>
       </div>
       <div className="buy">
-        <a href="/cart" onClick={() => AddToCart(product)}>
+        <a href="/cart" onClick={() => AddProductToCart(product)}>
           {" "}
           Mua Ngay
         </a>

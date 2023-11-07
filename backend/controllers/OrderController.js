@@ -312,6 +312,32 @@ export const GetOrderByUser = expressAsyncHandler(async (req, res) => {
   }
 });
 
+export const GetOrderDetailByUser = expressAsyncHandler(async(req, res) => {
+    try {
+      const { data } = await axios.post(
+        "https://dev-online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/detail",
+        {
+          order_code: req?.params.orderId,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Token: process.env.TOKEN_GHN,
+          },
+        },
+        
+      );
+      if (data) {
+        res.send(data);
+      } else {
+        res.status(401).send({ message: "no order" });
+      }
+    } catch (error) {
+      console.log('error', error);
+    }
+  
+})
+
 export const GetOrderPaypalByUser = expressAsyncHandler(async (req, res) => {
   const Order = await OrderModel.find({
     user: req.params.id,

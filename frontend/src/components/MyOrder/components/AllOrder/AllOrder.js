@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getOrderByUser } from "../../../../actions/OrderAction";
 import { formatPrice } from "../../../../untils/index";
 import "./AllOrder.css";
+import { Link } from "react-router-dom";
 
 const orderItem = (item) => (
   <div className="all-myorder-item">
@@ -17,18 +18,20 @@ const orderItem = (item) => (
   </div>
 );
 
-export const orderParent = (item) => (
-  <div className="all-myorder-parent-item">
-    <div className="all-myorder-list">
-      {item.orderItems.map((item) => orderItem(item))}
-    </div>
-    <div className="all-myorder-item-totalprice">
-      <div>
-        <span>Tổng số tiền : </span>{" "}
-        <strong>{formatPrice(item.totalPrice)}₫</strong>
+const orderParent = (item) => (
+  <Link to={`/detailOrder/${item?.order_code}/${item?.totalPrice}`}>
+    <div className="all-myorder-parent-item">
+      <div className="all-myorder-list">
+        {item.orderItems.map((item) => orderItem(item))}
+      </div>
+      <div className="all-myorder-item-totalprice">
+        <div>
+          <span>Tổng số tiền : </span>{" "}
+          <strong>{formatPrice(item.totalPrice)}₫</strong>
+        </div>
       </div>
     </div>
-  </div>
+  </Link>
 );
 
 function AllOrder(props) {

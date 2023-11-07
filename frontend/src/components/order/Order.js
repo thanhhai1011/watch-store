@@ -24,9 +24,9 @@ function Order(props) {
   const [listDistrict, setListDistrict] = useState(false);
   const [listWard, setListWard] = useState(false);
 
-  const [chooseProvince, setChooseProvince] = useState({name: "Hồ Chí Minh"});
-  const [chooseDistrict, setChooseDistrict] = useState({name: "Quận / Huyện"});
-  const [chooseWard, setChooseWard] = useState({name: "Phường / Xã"});
+  const [chooseProvince, setChooseProvince] = useState({ name: "Hồ Chí Minh" });
+  const [chooseDistrict, setChooseDistrict] = useState({ name: "Quận / Huyện" });
+  const [chooseWard, setChooseWard] = useState({ name: "Phường / Xã" });
 
 
   const handleListProvince = (e) => {
@@ -55,7 +55,7 @@ function Order(props) {
       return;
     }
     const Order = {
-      to_ward_code: chooseWard.id ,
+      to_ward_code: chooseWard.id,
       to_district_id: chooseDistrict.id,
 
       orderItems: [...cartItems],
@@ -82,19 +82,19 @@ function Order(props) {
   }, []);
 
   const handleSelectProvince = (name, id) => {
-    setChooseProvince({name, id});
+    setChooseProvince({ name, id });
     setListProvince(!listProvince);
     dispatch(GetAllDistrict(id));
   };
 
   const handleSelectDistrict = (name, id) => {
-    setChooseDistrict({name, id});
+    setChooseDistrict({ name, id });
     setListDistrict(!listDistrict);
     dispatch(GetAllWard(id));
   };
 
   const handleSelectWard = (name, id) => {
-    setChooseWard({name, id});
+    setChooseWard({ name, id });
     setListWard(!listWard);
   };
 
@@ -137,17 +137,17 @@ function Order(props) {
                       <aside>
                         {allProvince
                           ? allProvince.data.map((item) => (
-                              <span
-                                onClick={() =>
-                                  handleSelectProvince(
-                                    item. ProvinceName,
-                                    item.ProvinceID
-                                  )
-                                }
-                              >
-                                {item. ProvinceName}
-                              </span>
-                            ))
+                            <span
+                              onClick={() =>
+                                handleSelectProvince(
+                                  item.ProvinceName,
+                                  item.ProvinceID
+                                )
+                              }
+                            >
+                              {item.ProvinceName}
+                            </span>
+                          ))
                           : ""}
                       </aside>
                     </div>
@@ -176,17 +176,17 @@ function Order(props) {
                       <aside>
                         {allDistrict
                           ? allDistrict.data.map((item) => (
-                              <span
-                                onClick={() =>
-                                  handleSelectDistrict(
-                                    item.DistrictName,
-                                    item.DistrictID
-                                  )
-                                }
-                              >
-                                {item.DistrictName}
-                              </span>
-                            ))
+                            <span
+                              onClick={() =>
+                                handleSelectDistrict(
+                                  item.DistrictName,
+                                  item.DistrictID
+                                )
+                              }
+                            >
+                              {item.DistrictName}
+                            </span>
+                          ))
                           : ""}
                       </aside>
                     </div>
@@ -215,14 +215,14 @@ function Order(props) {
                       <aside>
                         {allWard && allWard.data !== null
                           ? allWard.data.map((item) => (
-                              <span
-                                onClick={() =>
-                                  handleSelectWard(item. WardName, item.WardCode)
-                                }
-                              >
-                                {item. WardName}
-                              </span>
-                            ))
+                            <span
+                              onClick={() =>
+                                handleSelectWard(item.WardName, item.WardCode)
+                              }
+                            >
+                              {item.WardName}
+                            </span>
+                          ))
                           : ""}
                       </aside>
                     </div>

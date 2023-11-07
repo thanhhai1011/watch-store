@@ -14,13 +14,14 @@ import MyOrderPage from './pages/MyOrderPage';
 import ChatPage from './pages/ChatPage';
 import PaymentPage from './pages/PaymentPage';
 import OrderSuccessPage from './pages/OrderSuccessPage'
+import DetailOrderPage from './pages/DetailOrderPage';
 
 function App() {
   return (
     <div className="App">
-  
+
       <Router>
-        
+
         <ResetScroll></ResetScroll>
 
         <Route path="/" exact>
@@ -47,6 +48,9 @@ function App() {
 
         <Route path='/order'>
           <OrderPage></OrderPage>
+        </Route>
+        <Route path="/detailOrder/:orderId/:totalPrice">
+          <DetailOrderPage></DetailOrderPage>
         </Route>
         <Route path='/orderSuccess'>
           <OrderSuccessPage></OrderSuccessPage>
